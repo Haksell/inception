@@ -11,7 +11,7 @@ services:
     links:
       - wordpress
     restart: always
-  mysql:
+  mariadb:
     image: mariadb
     ports:
       - '3306:3306'
@@ -29,8 +29,8 @@ services:
     environment:
       - WORDPRESS_DB_NAME=wpdb
       - WORDPRESS_TABLE_PREFIX=wp_
-      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_PASSWORD=Strong password
     links:
-      - mysql
+      - mariadb
     restart: always
