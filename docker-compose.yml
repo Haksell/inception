@@ -18,7 +18,10 @@ services:
     volumes:
       - ./volume_data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=Strong password
+      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
     restart: always
   wordpress:
     image: wordpress:4.7.1-php7.0-fpm
@@ -27,10 +30,11 @@ services:
     volumes:
       - ./volume_files:/var/www/html
     environment:
-      - WORDPRESS_DB_NAME=wpdb
       - WORDPRESS_TABLE_PREFIX=wp_
       - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_PASSWORD=Strong password
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
     links:
       - mariadb
     restart: always
