@@ -4,6 +4,7 @@ RUN apk add --no-cache mariadb mariadb-client mariadb-server-utils pwgen && \
     rm -f /var/cache/apk/*
 
 COPY mariadb.sh /scripts/entrypoint.sh
+COPY init.sql /scripts/init.sql
 
 RUN mkdir /docker-entrypoint-initdb.d && \
     mkdir /scripts/pre-exec.d && \
