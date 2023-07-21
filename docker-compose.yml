@@ -24,7 +24,7 @@ services:
       - MYSQL_PASSWORD=wordpress
     restart: always
   wordpress:
-    image: wordpress:4.7.1-php7.0-fpm
+    image: wordpress:6.2.2-php8.0-fpm-alpine
     ports:
       - '9000:9000'
     volumes:
