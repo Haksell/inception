@@ -15,7 +15,7 @@ clean: down
 	sudo rm -rf logs volume_files volume_data
 	docker system prune -a --volumes -f
 
-re: fclean
+re: clean
 	docker compose up -d --build
 
 logs:
