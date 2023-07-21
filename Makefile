@@ -1,6 +1,6 @@
-CONTAINERS	:= $(shell docker ps -a -q)
+CONTAINERS	:= $(shell docker ps -aq)
 VOLUMES		:= $(shell docker volume ls -q)
-IMAGES		:= $(shell docker image ls -q)
+IMAGES		:= $(shell docker image ls -aq)
 
 up:
 	docker compose up -d
