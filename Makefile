@@ -17,7 +17,7 @@ fclean: clean
 re: fclean
 	docker compose up -d --build
 
-logging:
+logs:
 	docker compose logs -f
 
-.SILENT: all clean fclean rebuild logs
+.PHONY: all clean fclean rebuild logs
