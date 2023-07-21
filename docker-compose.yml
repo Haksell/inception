@@ -44,7 +44,6 @@ services:
       - '80:80'
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./logs/nginx:/var/log/nginx
       - ./volume_files:/var/www/html
     restart: always
     depends_on:
