@@ -7,8 +7,6 @@ COPY mariadb.sh /scripts/entrypoint.sh
 COPY init.sql /scripts/init.sql
 
 RUN mkdir /docker-entrypoint-initdb.d && \
-    mkdir /scripts/pre-exec.d && \
-    mkdir /scripts/pre-init.d && \
     chmod -R 755 /scripts
 
 EXPOSE 3306
