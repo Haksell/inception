@@ -7,7 +7,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx
-      - ./wordpress:/var/www/html
+      - ./volume_files:/var/www/html
     links:
       - wordpress
     restart: always
@@ -16,7 +16,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./db-data:/var/lib/mysql
+      - ./volume_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=Strong password
     restart: always
@@ -25,7 +25,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - ./wordpress:/var/www/html
+      - ./volume_files:/var/www/html
     environment:
       - WORDPRESS_DB_NAME=wpdb
       - WORDPRESS_TABLE_PREFIX=wp_
