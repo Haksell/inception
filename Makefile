@@ -2,17 +2,17 @@ CONTAINERS	:= $(shell docker ps -a -q)
 VOLUMES		:= $(shell docker volume ls -q)
 IMAGES		:= $(shell docker image ls -q)
 
-all:
+up:
 	docker compose up -d
 
-clean:
+down:
 	docker compose down
 
-fclean: clean
+clean: down
 	if [ -n "$(CONTAINERS)" ]; then docker rm -f $(CONTAINERS); fi
 	if [ -n "$(VOLUMES)" ]; then docker volume rm $(VOLUMES); fi
 	if [ -n "$(IMAGES)" ]; then docker image rm $(IMAGES); fi
-	rm -rf logs volume_files volume_data
+	sudo rm -rf logs volume_files volume_data
 	docker system prune -a --volumes -f
 
 re: fclean
@@ -21,4 +21,4 @@ re: fclean
 logs:
 	docker compose logs -f
 
-.PHONY: all clean fclean rebuild logs
+.PHONY: up down clean re logs
