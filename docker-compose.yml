@@ -13,6 +13,8 @@ services:
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
     restart: always
+    networks:
+      - axbrisse
   wordpress:
     image: wordpress:6.2.2-php8.0-fpm-alpine
     ports:
@@ -28,6 +30,8 @@ services:
     restart: always
     depends_on:
       - mariadb
+    networks:
+      - axbrisse
   nginx:
     image: nginx:1.25.1-alpine
     ports:
@@ -39,6 +43,8 @@ services:
     restart: always
     depends_on:
       - wordpress
+    networks:
+      - axbrisse
 
 networks:
   axbrisse:
