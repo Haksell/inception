@@ -12,6 +12,4 @@ RUN mkdir /docker-entrypoint-initdb.d && \
 
 EXPOSE 3306
 
-VOLUME ["/var/lib/mysql"]
-
 ENTRYPOINT ["/scripts/entrypoint.sh"]
