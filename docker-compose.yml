@@ -1,16 +1,6 @@
 version: '3.8'
+
 services:
-  nginx:
-    image: nginx:1.25.1-alpine
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./logs/nginx:/var/log/nginx
-      - ./volume_files:/var/www/html
-    links:
-      - wordpress
-    restart: always
   mariadb:
     image: mariadb:11.0.2
     ports:
@@ -35,6 +25,20 @@ services:
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_DB_USER=wordpress
       - WORDPRESS_DB_PASSWORD=wordpress
-    links:
-      - mariadb
     restart: always
+    depends_on:
+      - mariadb
+  nginx:
+    image: nginx:1.25.1-alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./volume_files:/var/www/html
+    restart: always
+    depends_on:
+      - wordpress
+
+networks:
+  axbrisse:
