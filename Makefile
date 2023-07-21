@@ -19,6 +19,6 @@ re: clean
 	docker compose up -d --build
 
 logs:
-	docker compose logs -f
+	docker compose logs
 
 .PHONY: up down clean re logs
