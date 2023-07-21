@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   mariadb:
-    image: mariadb:11.0.2
+    build:
+      context: ./mariadb
+      dockerfile: Dockerfile
     ports:
       - '3306:3306'
     volumes:

@@ -19,9 +19,9 @@ clean: down
 	docker system prune -a --volumes -f
 
 re: clean
-	docker compose up -d --build
+	$(MAKE) build
 
 logs:
 	docker compose logs
 
-.PHONY: up down clean re logs
+.PHONY: up build down clean re logs
