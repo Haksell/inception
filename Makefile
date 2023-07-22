@@ -16,7 +16,9 @@ clean: down
 	if [ -n "$(VOLUMES)" ]; then docker volume rm -f $(VOLUMES); fi
 	if [ -n "$(IMAGES)" ]; then docker image rm -f $(IMAGES); fi
 	sudo rm -rf volume_files volume_data
+	sudo rm -rf ~/.docker/config.json 
 	docker system prune -a --volumes -f
+	sudo systemctl restart docker
 
 re: clean
 	$(MAKE) build
