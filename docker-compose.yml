@@ -20,8 +20,11 @@ services:
     networks:
       - inception
   wordpress:
-    image: wordpress:6.2.2-php8.0-fpm-alpine
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
     container_name: wordpress
+    image: wordpress
     ports:
       - '9000:9000'
     volumes:

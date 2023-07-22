@@ -1,0 +1,1 @@
+FROM wordpress:6.2.2-php8.0-fpm-alpine
