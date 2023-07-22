@@ -4,24 +4,19 @@ set -Eeuo pipefail
 if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 	uid="$(id -u)"
 	gid="$(id -g)"
-	if [ "$uid" = '0' ]; then
-		case "$1" in
-			apache2*)
-				user="${APACHE_RUN_USER:-www-data}"
-				group="${APACHE_RUN_GROUP:-www-data}"
-				pound='#'
-				user="${user#$pound}"
-				group="${group#$pound}"
-				;;
-			*)
-				user='www-data'
-				group='www-data'
-				;;
-		esac
-	else
-		user="$uid"
-		group="$gid"
-	fi
+	case "$1" in
+		apache2*)
+			user="${APACHE_RUN_USER:-www-data}"
+			group="${APACHE_RUN_GROUP:-www-data}"
+			pound='#'
+			user="${user#$pound}"
+			group="${group#$pound}"
+			;;
+		*)
+			user='www-data'
+			group='www-data'
+			;;
+	esac
 
 	if [ ! -e index.php ] && [ ! -e wp-includes/version.php ]; then
 		if [ "$uid" = '0' ] && [ "$(stat -c '%u:%g' .)" = '0:0' ]; then

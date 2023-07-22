@@ -1,33 +1,21 @@
 FROM php:8.0-fpm-alpine
 
-RUN set -eux; \
-    apk add --no-cache bash ghostscript;
-
 RUN set -ex; \
-    \
-    apk add --no-cache --virtual .build-deps \
-    $PHPIZE_DEPS \
+    apk add --no-cache \
+    bash \
+    dpkg-dev dpkg \
+    file \
+    g++ \
+    gcc \
+    libc-dev \
+    make \
+    pkgconf \
+    re2c \
     freetype-dev \
     icu-dev \
-    imagemagick-dev \
-    libjpeg-turbo-dev \
-    libpng-dev \
-    libwebp-dev \
-    libzip-dev \
-    ; \
-    \
-    docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg \
-    --with-webp \
-    ; \
-    docker-php-ext-install -j "$(nproc)" \
-    bcmath \
-    exif \
-    gd \
-    intl \
-    mysqli \
-    zip;
+    ;
+
+RUN docker-php-ext-install -j "$(nproc)" mysqli;
 
 RUN set -eux; \
     curl -o wordpress.tar.gz -fL "https://wordpress.org/wordpress-6.2.2.tar.gz"; \
@@ -35,10 +23,6 @@ RUN set -eux; \
     rm wordpress.tar.gz; \
     chown -R www-data:www-data /usr/src/wordpress; \
     mkdir wp-content; \
-    for dir in /usr/src/wordpress/wp-content/*/ cache; do \
-    dir="$(basename "${dir%/}")"; \
-    mkdir "wp-content/$dir"; \
-    done; \
     chown -R www-data:www-data wp-content; \
     chmod -R 1777 wp-content
 
