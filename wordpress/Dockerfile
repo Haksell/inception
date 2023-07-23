@@ -1,20 +1,6 @@
 FROM php:8.0-fpm-alpine
 
-RUN set -ex; \
-    apk add --no-cache \
-    bash \
-    dpkg-dev dpkg \
-    file \
-    g++ \
-    gcc \
-    libc-dev \
-    make \
-    pkgconf \
-    re2c \
-    freetype-dev \
-    icu-dev \
-    ;
-
+RUN apk add --no-cache bash;
 RUN docker-php-ext-install -j "$(nproc)" mysqli;
 
 RUN set -eux; \
@@ -32,5 +18,6 @@ COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
 
+EXPOSE 9000
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm"]
