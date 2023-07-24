@@ -16,7 +16,7 @@ services:
       - MYSQL_DATABASE=mariadb
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
-    restart: always
+    restart: on-failure
     networks:
       - inception
   wordpress:
@@ -35,7 +35,7 @@ services:
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_DB_USER=wordpress
       - WORDPRESS_DB_PASSWORD=wordpress
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
     networks:
@@ -51,7 +51,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./volume_files:/var/www/html
-    restart: always
+    restart: on-failure
     depends_on:
       - wordpress
     networks:
