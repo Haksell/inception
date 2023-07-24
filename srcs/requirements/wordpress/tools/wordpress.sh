@@ -7,7 +7,7 @@ if [ ! -f $lock_file ]; then
 
     wp core download --allow-root
     rm -f /var/www/html/wp-config.php
-    wp config create --dbname=mariadb --dbhost=mariadb --dbuser=$MYSQL_USER --dbpass=wordpress --allow-root --skip-check
+    wp config create --dbname=mariadb --dbhost=mariadb --dbuser=$DB_USER --dbpass=$DB_USER_PASSWORD --allow-root --skip-check
 
     until wp db check --path=/var/www/html --quiet --allow-root; do
         echo "Waiting for MySQL..."
