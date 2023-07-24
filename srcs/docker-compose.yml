@@ -10,7 +10,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./volume_data:/var/lib/mysql
+      - db:/var/lib/mysql
     env_file:
       - .env
     restart: on-failure
@@ -25,7 +25,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - ./volume_files:/var/www/html
+      - files:/var/www/html
     env_file:
       - .env
     restart: on-failure
@@ -42,7 +42,7 @@ services:
     ports:
       - '443:443'
     volumes:
-      - ./volume_files:/var/www/html
+      - files:/var/www/html
     restart: on-failure
     depends_on:
       - wordpress
@@ -52,3 +52,17 @@ services:
 networks:
   inception:
     name: inception
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/axbrisse/data/db
+  files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/axbrisse/data/files
