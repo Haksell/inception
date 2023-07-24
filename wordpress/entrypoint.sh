@@ -17,4 +17,4 @@ wp theme install twentyseventeen --activate --allow-root
 wp post delete $(wp post list --format=ids --allow-root) --allow-root
 wp post create --post_type=post --post_title="Hello Inception!" --post_content="lol" --post_status=publish --allow-root
 
-php-fpm7.4 -F
+exec php-fpm7.4 -F
