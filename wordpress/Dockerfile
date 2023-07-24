@@ -1,23 +1,25 @@
-FROM php:8.0-fpm-alpine
+FROM debian:bullseye
 
-RUN apk add --no-cache bash;
-RUN docker-php-ext-install -j "$(nproc)" mysqli;
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    php7.4-fpm \
+    php7.4-mysql \
+    mariadb-client
 
-RUN set -eux; \
-    curl -o wordpress.tar.gz -fL "https://wordpress.org/wordpress-6.2.2.tar.gz"; \
-    tar -xzf wordpress.tar.gz -C /usr/src/; \
-    rm wordpress.tar.gz; \
-    chown -R www-data:www-data /usr/src/wordpress; \
-    mkdir wp-content; \
-    chown -R www-data:www-data wp-content; \
-    chmod -R 1777 wp-content
+WORKDIR /var/www/html
 
-VOLUME /var/www/html
+RUN mkdir -p /run/php
 
-COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
+COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 9000
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm"]
+
+ENTRYPOINT ["/entrypoint.sh"]

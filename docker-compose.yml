@@ -13,7 +13,7 @@ services:
       - ./volume_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_DATABASE=wordpress
+      - MYSQL_DATABASE=mariadb
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
     restart: always
