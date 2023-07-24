@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mariadb:
     build:
-      context: ./mariadb
+      context: ./requirements/mariadb
       dockerfile: Dockerfile
     container_name: mariadb
     image: mariadb
@@ -21,7 +21,7 @@ services:
       - inception
   wordpress:
     build:
-      context: ./wordpress
+      context: ./requirements/wordpress
       dockerfile: Dockerfile
     container_name: wordpress
     image: wordpress
@@ -42,7 +42,7 @@ services:
       - inception
   nginx:
     build:
-      context: ./nginx
+      context: ./requirements/nginx
       dockerfile: Dockerfile
     container_name: nginx
     image: nginx
