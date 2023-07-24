@@ -14,6 +14,6 @@ COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 EXPOSE 9000
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY wordpress.sh /wordpress.sh
+RUN chmod +x /wordpress.sh
+ENTRYPOINT ["/wordpress.sh"]
