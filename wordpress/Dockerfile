@@ -1,11 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    curl \
-    php7.4-fpm \
-    php7.4-mysql \
-    mariadb-client
+RUN apt-get update && apt-get install -y curl php7.4-fpm php7.4-mysql mariadb-client
 
 WORKDIR /var/www/html
 
@@ -17,9 +12,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 EXPOSE 9000
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
