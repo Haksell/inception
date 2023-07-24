@@ -11,11 +11,8 @@ services:
       - '3306:3306'
     volumes:
       - ./volume_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_DATABASE=mariadb
-      - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
+    env_file:
+      - .env
     restart: on-failure
     networks:
       - inception
@@ -29,12 +26,8 @@ services:
       - '9000:9000'
     volumes:
       - ./volume_files:/var/www/html
-    environment:
-      - WORDPRESS_TABLE_PREFIX=wp_
-      - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_NAME=wordpress
-      - WORDPRESS_DB_USER=wordpress
-      - WORDPRESS_DB_PASSWORD=wordpress
+    env_file:
+      - .env
     restart: on-failure
     depends_on:
       - mariadb
