@@ -41,8 +41,11 @@ services:
     networks:
       - inception
   nginx:
-    image: nginx:1.25.1-alpine
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: nginx
+    image: nginx
     ports:
       - '80:80'
     volumes:
