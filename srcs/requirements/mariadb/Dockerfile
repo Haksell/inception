@@ -1,6 +1,6 @@
 FROM alpine:3.17.4
 
-RUN apk add --no-cache mariadb mariadb-server-utils && rm -f /var/cache/apk/*
+RUN apk add --no-cache mariadb && rm -f /var/cache/apk/*
 
 EXPOSE 3306
 
