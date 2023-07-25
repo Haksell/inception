@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: on-failure
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - "9001:9000"
+    networks:
+      - inception
   adminer:
     build:
       context: ./requirements/adminer
@@ -109,3 +120,9 @@ volumes:
       type: none
       o: bind
       device: /home/axbrisse/data/files
+  portainer_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/axbrisse/data/portainer_data
