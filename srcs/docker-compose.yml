@@ -1,9 +1,28 @@
 version: '3.8'
 
 services:
+  vsftpd:
+    build:
+      context: ./requirements/vsftpd
+      dockerfile: Dockerfile
+    container_name: vsftpd
+    image: vsftpd
+    volumes:
+      - files:/var/www/html
+    ports:
+      - '20-21:20-21'
+      - '30000-30009:30000-30009'
+    env_file:
+      - .env
+    restart: on-failure
+    networks:
+      - inception
   redis:
+    build:
+      context: ./requirements/redis
+      dockerfile: Dockerfile
     container_name: redis
-    image: redis:latest
+    image: redis
     ports:
       - '6379:6379'
     volumes:
@@ -41,6 +60,7 @@ services:
     restart: on-failure
     depends_on:
       - mariadb
+      - redis
     networks:
       - inception
   nginx:
@@ -56,22 +76,6 @@ services:
     restart: on-failure
     depends_on:
       - wordpress
-    networks:
-      - inception
-  vsftpd:
-    build:
-      context: ./requirements/vsftpd
-      dockerfile: Dockerfile
-    container_name: vsftpd
-    image: vsftpd
-    volumes:
-      - files:/var/www/html
-    ports:
-      - '20-21:20-21'
-      - '30000-30009:30000-30009'
-    env_file:
-      - .env
-    restart: on-failure
     networks:
       - inception
 
