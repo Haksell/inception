@@ -10,6 +10,7 @@ services:
     ports:
       - 8080:8080
     restart: on-failure
+    init: true
     networks:
       - inception
   vsftpd:
@@ -26,6 +27,7 @@ services:
     env_file:
       - .env
     restart: on-failure
+    init: true
     networks:
       - inception
   redis:
