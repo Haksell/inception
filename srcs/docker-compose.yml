@@ -2,8 +2,11 @@ version: '3.8'
 
 services:
   portainer:
-    image: portainer/portainer-ce:latest
+    build:
+      context: ./requirements/portainer
+      dockerfile: Dockerfile
     container_name: portainer
+    image: portainer
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
