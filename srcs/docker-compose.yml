@@ -3,7 +3,7 @@ version: '3.8'
 services:
   portainer:
     build:
-      context: ./requirements/portainer
+      context: ./requirements/bonus/portainer
       dockerfile: Dockerfile
     container_name: portainer
     image: portainer
@@ -17,7 +17,7 @@ services:
       - inception
   adminer:
     build:
-      context: ./requirements/adminer
+      context: ./requirements/bonus/adminer
       dockerfile: Dockerfile
     container_name: adminer
     image: adminer
@@ -29,7 +29,7 @@ services:
       - inception
   vsftpd:
     build:
-      context: ./requirements/vsftpd
+      context: ./requirements/bonus/vsftpd
       dockerfile: Dockerfile
     container_name: vsftpd
     image: vsftpd
@@ -46,7 +46,7 @@ services:
       - inception
   redis:
     build:
-      context: ./requirements/redis
+      context: ./requirements/bonus/redis
       dockerfile: Dockerfile
     container_name: redis
     image: redis
