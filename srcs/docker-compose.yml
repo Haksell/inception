@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    volumes:
+      - files:/data
+    restart: on-failure
+    networks:
+      - inception
   mariadb:
     build:
       context: ./requirements/mariadb

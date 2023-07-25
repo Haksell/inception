@@ -28,7 +28,13 @@ clean: down
 re: clean
 	$(MAKE) build
 
+revolume: down
+	if [ -n "$(VOLUMES)" ]; then docker volume rm -f $(VOLUMES); fi
+	sudo rm -rf /home/axbrisse/data/*
+	$(CREATE_VOLUMES)
+	$(MAKE) build
+
 logs:
 	cd srcs && docker compose logs -f
 
-.PHONY: up build down clean re logs
+.PHONY: up build down clean re revolume logs

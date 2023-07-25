@@ -20,9 +20,16 @@ if [ ! -f $lock_file ]; then
     wp post delete $(wp post list --format=ids --allow-root) --allow-root
     wp post create --post_type=post --post_title="Hello Inception!" --post_content="lol" --post_status=publish --allow-root
 
+    wp config set WP_REDIS_HOST redis --allow-root
+  	wp config set WP_REDIS_PORT 6379 --raw --allow-root
+    wp plugin install redis-cache --activate --allow-root
+    wp redis enable --force --allow-root --path=/var/www/html
+
+    echo "WordPress setup completed."
+
     touch $lock_file
 else
-    echo "Setup has already been run, skipping..."
+    echo "WordPress setup has already been run, skipping..."
 fi
 
 exec php-fpm7.4 -F
