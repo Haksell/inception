@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  adminer:
+    build:
+      context: ./requirements/adminer
+      dockerfile: Dockerfile
+    container_name: adminer
+    image: adminer
+    ports:
+      - 8080:8080
+    restart: on-failure
+    networks:
+      - inception
   vsftpd:
     build:
       context: ./requirements/vsftpd
@@ -73,19 +84,6 @@ services:
       - '443:443'
     volumes:
       - files:/var/www/html
-    restart: on-failure
-    depends_on:
-      - wordpress
-    networks:
-      - inception
-  adminer:
-    build:
-      context: ./requirements/adminer
-      dockerfile: Dockerfile
-    container_name: adminer
-    image: adminer
-    ports:
-      - 8080:8080
     restart: on-failure
     depends_on:
       - wordpress
