@@ -57,5 +57,4 @@ function draw() {
 
 function windowResized() {
 	resizeGrid()
-	resizeCanvas(windowWidth, windowHeight)
 }
