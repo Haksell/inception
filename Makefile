@@ -4,10 +4,6 @@ CONTAINERS		:= $(shell docker ps -aq)
 VOLUMES			:= $(shell docker volume ls -q)
 IMAGES			:= $(shell docker image ls -aq)
 
-up:
-	$(CREATE_VOLUMES)
-	cd srcs && docker compose up -d
-
 build:
 	$(CREATE_VOLUMES)
 	cd srcs && docker compose up -d --build
