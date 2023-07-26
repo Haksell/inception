@@ -1,4 +1,4 @@
-CREATE_VOLUMES	:= sudo mkdir -p /home/axbrisse/data/db /home/axbrisse/data/files /home/axbrisse/data/portainer_data /home/axbrisse/data/static_data
+CREATE_VOLUMES	:= sudo mkdir -p /home/axbrisse/data/mariadb_data /home/axbrisse/data/wordpress_data /home/axbrisse/data/portainer_data /home/axbrisse/data/fdf_data
 
 CONTAINERS		:= $(shell docker ps -aq)
 VOLUMES			:= $(shell docker volume ls -q)

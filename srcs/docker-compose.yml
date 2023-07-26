@@ -8,7 +8,7 @@ services:
     container_name: static_site
     image: static_site
     volumes:
-      - static_data:/var/www/static
+      - fdf_data:/var/www/static
     restart: on-failure
     networks:
       - inception
@@ -45,7 +45,7 @@ services:
     container_name: vsftpd
     image: vsftpd
     volumes:
-      - files:/var/www/html
+      - wordpress_data:/var/www/html
     ports:
       - '20-21:20-21'
       - '30000-30009:30000-30009'
@@ -64,7 +64,7 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - files:/data
+      - wordpress_data:/data
     restart: on-failure
     networks:
       - inception
@@ -77,7 +77,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - db:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     env_file:
       - .env
     restart: on-failure
@@ -92,7 +92,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - files:/var/www/html
+      - wordpress_data:/var/www/html
     env_file:
       - .env
     restart: on-failure
@@ -110,8 +110,8 @@ services:
     ports:
       - '443:443'
     volumes:
-      - files:/var/www/html
-      - static_data:/var/www/static
+      - wordpress_data:/var/www/html
+      - fdf_data:/var/www/static
     restart: on-failure
     depends_on:
       - static_site
@@ -124,27 +124,27 @@ networks:
     name: inception
 
 volumes:
-  db:
+  mariadb_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/axbrisse/data/db
-  files:
+      device: /home/axbrisse/data/mariadb_data
+  wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/axbrisse/data/files
+      device: /home/axbrisse/data/wordpress_data
   portainer_data:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/axbrisse/data/portainer_data
-  static_data:
+  fdf_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/axbrisse/data/static_data
+      device: /home/axbrisse/data/fdf_data
