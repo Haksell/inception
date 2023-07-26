@@ -1,4 +1,4 @@
-const CELL_SIZE = 10
+const CELL_SIZE = 13
 const CHANGES = 30
 const COLORS = ['crimson', 'dodgerblue', 'lightblue', 'limegreen']
 
@@ -8,24 +8,21 @@ function setup() {
 	createCanvas(windowWidth, windowHeight)
 	noStroke()
 
-	for (let i = 0; i < width / CELL_SIZE; i++) {
+	for (let i = 0; i < windowWidth / CELL_SIZE; i++) {
 		row = []
-		for (let j = 0; j < height / CELL_SIZE; j++) {
+		for (let j = 0; j < windowHeight / CELL_SIZE; j++) {
 			let rand_color = random(COLORS)
 			let rand_size = random(2, CELL_SIZE)
 			row.push([rand_color, rand_size])
 		}
 		grid.push(row)
 	}
-	fullscreen()
 }
 
 function draw() {
-	fullscreen()
 	background('black')
-	// Draw the grid
-	for (let i = 0; i < width / CELL_SIZE; i++) {
-		for (let j = 0; j < height / CELL_SIZE; j++) {
+	for (let i = 0; i < windowWidth / CELL_SIZE; i++) {
+		for (let j = 0; j < windowHeight / CELL_SIZE; j++) {
 			fill(grid[i][j][0])
 			circle(
 				i * CELL_SIZE + CELL_SIZE / 2,
@@ -34,7 +31,6 @@ function draw() {
 			)
 		}
 	}
-	// Modify some elements
 	for (var i = 0; i < CHANGES; i++) {
 		let rand_color = random(COLORS)
 		let rand_size = random(2, CELL_SIZE)
@@ -43,4 +39,8 @@ function draw() {
 			rand_size,
 		]
 	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight)
 }
