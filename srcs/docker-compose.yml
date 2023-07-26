@@ -1,15 +1,6 @@
 version: '3.8'
 
 services:
-  fdf:
-    build: ./requirements/bonus/fdf
-    container_name: fdf
-    image: fdf
-    volumes:
-      - fdf_data:/var/www/fdf
-    restart: on-failure
-    networks:
-      - inception
   portainer:
     build: ./requirements/bonus/portainer
     container_name: portainer
@@ -97,10 +88,9 @@ services:
       - 443:443
     volumes:
       - wordpress_data:/var/www/html
-      - fdf_data:/var/www/fdf
+      - ./requirements/bonus/fdf:/var/www/fdf
     restart: on-failure
     depends_on:
-      - fdf
       - wordpress
     networks:
       - inception
@@ -128,9 +118,3 @@ volumes:
       type: none
       o: bind
       device: /home/axbrisse/data/portainer_data
-  fdf_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/axbrisse/data/fdf_data
