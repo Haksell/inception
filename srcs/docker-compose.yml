@@ -88,7 +88,7 @@ services:
       - 443:443
     volumes:
       - wordpress_data:/var/www/html
-      - ./requirements/bonus/fdf:/var/www/fdf
+      - ./requirements/bonus/dots:/var/www/dots
     restart: on-failure
     depends_on:
       - wordpress
