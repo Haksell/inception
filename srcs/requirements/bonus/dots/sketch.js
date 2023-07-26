@@ -2,7 +2,7 @@ const COLORS = ['crimson', 'dodgerblue', 'lightblue', 'limegreen']
 const CELL_SIZE = 15
 const ACTIVITY = 0.001
 
-let grid = [[]]
+let grid = []
 let drawAll = true
 
 class Dot {
