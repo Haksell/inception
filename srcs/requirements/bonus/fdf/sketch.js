@@ -38,7 +38,7 @@ function draw() {
 			circle((i + 0.5) * CELL_SIZE, (j + 0.5) * CELL_SIZE, grid[i][j][1])
 		}
 	}
-	for (var i = 0; i < CHANGES; i++) {
+	for (let i = 0; i < CHANGES; i++) {
 		let rand_color = random(COLORS)
 		let rand_size = random(2, CELL_SIZE)
 		grid[int(random(grid.length))][int(random(grid[0].length))] = [
