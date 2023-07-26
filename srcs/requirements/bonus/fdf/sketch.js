@@ -3,7 +3,7 @@ const CELL_SIZE = 15
 const ACTIVITY = 0.001
 
 let grid = [[]]
-let drawAll = false
+let drawAll = true
 
 class Dot {
 	constructor() {
