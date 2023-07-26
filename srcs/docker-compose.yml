@@ -23,7 +23,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     ports:
-      - "9001:9000"
+      - 9001:9000
+    env_file:
+      - .env
     networks:
       - inception
   adminer:
@@ -47,8 +49,8 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     ports:
-      - '20-21:20-21'
-      - '30000-30009:30000-30009'
+      - 20-21:20-21
+      - 30000-30009:30000-30009
     env_file:
       - .env
     restart: on-failure
@@ -62,7 +64,7 @@ services:
     container_name: redis
     image: redis
     ports:
-      - '6379:6379'
+      - 6379:6379
     volumes:
       - wordpress_data:/data
     restart: on-failure
@@ -75,7 +77,7 @@ services:
     container_name: mariadb
     image: mariadb
     ports:
-      - '3306:3306'
+      - 3306:3306
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:
@@ -90,7 +92,7 @@ services:
     container_name: wordpress
     image: wordpress
     ports:
-      - '9000:9000'
+      - 9000:9000
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -108,7 +110,7 @@ services:
     container_name: nginx
     image: nginx
     ports:
-      - '443:443'
+      - 443:443
     volumes:
       - wordpress_data:/var/www/html
       - fdf_data:/var/www/static

@@ -14,4 +14,6 @@ RUN mkdir -p /data
 
 EXPOSE 9000
 
-ENTRYPOINT ["/usr/local/bin/portainer/portainer"]
+COPY tools/portainer.sh /portainer.sh
+RUN chmod +x /portainer.sh
+ENTRYPOINT ["/portainer.sh"]
