@@ -1,8 +1,9 @@
+html,
 body {
-    background-color: lightgrey;
+	margin: 0;
+	padding: 0;
 }
 
-h1 {
-    color: navy;
-    text-align: center;
+canvas {
+	display: block;
 }
