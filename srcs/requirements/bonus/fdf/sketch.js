@@ -1,16 +1,27 @@
-const CELL_SIZE = 13
-const CHANGES = 30
 const COLORS = ['crimson', 'dodgerblue', 'lightblue', 'limegreen']
+const CELL_SIZE = 15
+const CHANGES = 200
 
-var grid = []
+let grid = []
+let gridWidth
+let gridHeight
+
+class Dot {
+	constructor() {
+		this.color = random(COLORS)
+		this.size = random(2, CELL_SIZE)
+	}
+}
 
 function setup() {
 	createCanvas(windowWidth, windowHeight)
 	noStroke()
 
-	for (let i = 0; i < windowWidth / CELL_SIZE; i++) {
+	gridWidth = windowWidth / CELL_SIZE
+	gridHeight = windowHeight / CELL_SIZE
+	for (let i = 0; i < gridWidth; i++) {
 		row = []
-		for (let j = 0; j < windowHeight / CELL_SIZE; j++) {
+		for (let j = 0; j < gridHeight; j++) {
 			let rand_color = random(COLORS)
 			let rand_size = random(2, CELL_SIZE)
 			row.push([rand_color, rand_size])
@@ -21,14 +32,10 @@ function setup() {
 
 function draw() {
 	background('black')
-	for (let i = 0; i < windowWidth / CELL_SIZE; i++) {
-		for (let j = 0; j < windowHeight / CELL_SIZE; j++) {
+	for (let i = 0; i < width / CELL_SIZE; i++) {
+		for (let j = 0; j < height / CELL_SIZE; j++) {
 			fill(grid[i][j][0])
-			circle(
-				i * CELL_SIZE + CELL_SIZE / 2,
-				j * CELL_SIZE + CELL_SIZE / 2,
-				grid[i][j][1]
-			)
+			circle((i + 0.5) * CELL_SIZE, (j + 0.5) * CELL_SIZE, grid[i][j][1])
 		}
 	}
 	for (var i = 0; i < CHANGES; i++) {
@@ -39,8 +46,4 @@ function draw() {
 			rand_size,
 		]
 	}
-}
-
-function windowResized() {
-	resizeCanvas(windowWidth, windowHeight)
 }
