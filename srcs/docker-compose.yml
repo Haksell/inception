@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  static_site:
+  fdf:
     build:
-      context: ./requirements/bonus/static_site
+      context: ./requirements/bonus/fdf
       dockerfile: Dockerfile
-    container_name: static_site
-    image: static_site
+    container_name: fdf
+    image: fdf
     volumes:
-      - fdf_data:/var/www/static
+      - fdf_data:/var/www/fdf
     restart: on-failure
     networks:
       - inception
@@ -113,10 +113,10 @@ services:
       - 443:443
     volumes:
       - wordpress_data:/var/www/html
-      - fdf_data:/var/www/static
+      - fdf_data:/var/www/fdf
     restart: on-failure
     depends_on:
-      - static_site
+      - fdf
       - wordpress
     networks:
       - inception
