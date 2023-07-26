@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends wget ca-certificates \
+    && apt-get install -y --no-install-recommends wget ca-certificates apache2-utils \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/portainer/portainer/releases/download/2.18.4/portainer-2.18.4-linux-amd64.tar.gz -O portainer.tar.gz \
